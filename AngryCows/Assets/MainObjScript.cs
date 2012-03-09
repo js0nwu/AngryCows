@@ -13,6 +13,16 @@ public class MainObjScript : MonoBehaviour {
 	public bool launched;
 	public Vector3 originalCubePosition;
 	public GameObject AllCubes;
+	public GameObject LivesGUIText;
+	public int lives = 5;
+	public Texture2D yellowSkin;
+	public Texture2D redSkin;
+	public Texture2D blackSkin;
+	public int birdMode;
+	public float yellowSpec = 3;
+	public float explosionRadius = 5.0F;
+	public float explosionPower = 10.0F;
+	
 	// Use this for initialization
 	void Start () {
 	this.rigidbody.useGravity = false;
@@ -22,10 +32,55 @@ public class MainObjScript : MonoBehaviour {
 		MainCam.active = true;
 		launched = false;
 		originalCubePosition = AllCubes.transform.position;
+		
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
+	
+		LivesGUIText.guiText.text = lives.ToString();
+		
+		if (Input.GetKeyDown(KeyCode.E) == true) 
+		{
+			
+				if (birdMode == 2)
+				{
+				this.rigidbody.velocity = this.rigidbody.velocity * yellowSpec;
+				}
+				if (birdMode == 3)
+				{
+				Vector3 explosionPosition = this.transform.position;
+					Collider[] colliders = Physics.OverlapSphere(explosionPosition, explosionRadius);
+					foreach (Collider hit in colliders)
+					{						
+					if (hit.rigidbody)
+						{
+						hit.rigidbody.AddExplosionForce(explosionPower, explosionPosition, explosionRadius, 3.0F);
+							
+						}
+					}
+				}
+		}
+		
+		if (Input.GetKeyDown(KeyCode.Q) == true)
+		{
+			if (birdMode == 1)
+			{
+			this.renderer.material.mainTexture = yellowSkin;
+			birdMode = 2;
+			}
+			else if (birdMode == 2)
+			{
+			this.renderer.material.mainTexture = blackSkin;
+			birdMode = 3;
+			}
+			else if (birdMode == 3)
+			{
+			this.renderer.material.mainTexture = redSkin;
+			birdMode = 1; 	
+			}
+		}
 		
 		if (Input.GetKeyDown(KeyCode.R) == true)
 		{
@@ -34,12 +89,16 @@ public class MainObjScript : MonoBehaviour {
 			this.transform.position = originalPosition;
 			AllCubes.transform.position = originalCubePosition;
 			this.rigidbody.useGravity = false;
+			this.rigidbody.velocity = this.transform.position * 0;
 			launched = false;
+			
+			lives = lives - 1;
 			}
 		}
 		
-		if (Input.GetKeyDown(KeyCode.F) == true)
+		if (Input.GetKeyDown(KeyCode.C) == true)
 		{
+			
 			if (CameraMode == 1)
 			{
 				MainCam.active = false;
