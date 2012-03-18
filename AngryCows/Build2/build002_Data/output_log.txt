@@ -13,4 +13,34 @@ Platform assembly: C:\Users\PillyBuilt7\Documents\AngryCows\Build2\build002_Data
 Loading C:\Users\PillyBuilt7\Documents\AngryCows\Build2\build002_Data\Managed\UnityEngine.dll into Unity Child Domain
 Platform assembly: C:\Users\PillyBuilt7\Documents\AngryCows\Build2\build002_Data\Managed\Assembly-CSharp.dll (this message is harmless)
 Loading C:\Users\PillyBuilt7\Documents\AngryCows\Build2\build002_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-- Completed reload, in  0.037 seconds
+- Completed reload, in  0.205 seconds
+Skipped rendering frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/BuildAgent/work/b0bcff80449a48aa/Runtime/Misc/Player.cpp Line: 1591)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: needs reset, doing it
+FullResetD3DDevice
+ResetD3DDevice
+dev->Reset
+D3Dwindow device not lost anymore
+Skipped rendering frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/BuildAgent/work/b0bcff80449a48aa/Runtime/Misc/Player.cpp Line: 1591)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: needs reset, doing it
+FullResetD3DDevice
+ResetD3DDevice
+dev->Reset
+D3Dwindow device not lost anymore
+Skipped rendering frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/BuildAgent/work/b0bcff80449a48aa/Runtime/Misc/Player.cpp Line: 1591)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: needs reset, doing it
+FullResetD3DDevice
+ResetD3DDevice
+dev->Reset
+D3Dwindow device not lost anymore

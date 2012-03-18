@@ -22,9 +22,13 @@ public class MainObjScript : MonoBehaviour {
 	public float yellowSpec = 3;
 	public float explosionRadius = 5.0F;
 	public float explosionPower = 10.0F;
+	public bool canSpec;
+	public bool canChange;
+	public Material BirdType;
 	
 	// Use this for initialization
 	void Start () {
+		BirdType.mainTexture = redSkin;
 	this.rigidbody.useGravity = false;
 	//this.rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 	originalPosition = this.transform.position;
@@ -32,7 +36,8 @@ public class MainObjScript : MonoBehaviour {
 		MainCam.active = true;
 		launched = false;
 		originalCubePosition = AllCubes.transform.position;
-		
+		canSpec = true;
+		canChange = true;
 		
 	}
 	
@@ -43,6 +48,8 @@ public class MainObjScript : MonoBehaviour {
 		
 		if (Input.GetKeyDown(KeyCode.E) == true) 
 		{
+			if (canSpec == true)
+			{
 			
 				if (birdMode == 2)
 				{
@@ -61,34 +68,51 @@ public class MainObjScript : MonoBehaviour {
 						}
 					}
 				}
+				canSpec = false;
+			}
 		}
 		
-		if (Input.GetKeyDown(KeyCode.Q) == true)
+		
+		
+		if (Input.GetKeyDown(KeyCode.Alpha1) == true)
 		{
-			if (birdMode == 1)
+			if (canChange == true)
 			{
-			this.renderer.material.mainTexture = yellowSkin;
-			birdMode = 2;
-			}
-			else if (birdMode == 2)
-			{
-			this.renderer.material.mainTexture = blackSkin;
-			birdMode = 3;
-			}
-			else if (birdMode == 3)
-			{
-			this.renderer.material.mainTexture = redSkin;
+			BirdType.mainTexture = redSkin;
 			birdMode = 1; 	
+			canChange = false;
+			}
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha2) == true)
+		{
+			if (canChange == true)
+			{
+			BirdType.mainTexture = yellowSkin;
+			birdMode = 2;
+			canChange = false;
+			}
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha3) == true)
+		{
+			if (canChange == true)
+			{
+			BirdType.mainTexture = blackSkin;
+			birdMode = 3;
+			canChange = false;
 			}
 		}
 		
 		if (Input.GetKeyDown(KeyCode.R) == true)
 		{
+			canSpec = true;
+			canChange = true;
 			if (launched == true)
 			{
+				this.rigidbody.velocity = this.rigidbody.velocity * 0;
+				this.rigidbody.useGravity = false;
 			this.transform.position = originalPosition;
 			AllCubes.transform.position = originalCubePosition;
-			this.rigidbody.useGravity = false;
+
 			this.rigidbody.velocity = this.transform.position * 0;
 			launched = false;
 			
