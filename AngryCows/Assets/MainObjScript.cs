@@ -13,8 +13,8 @@ public class MainObjScript : MonoBehaviour {
 	public bool launched;
 	public Vector3 originalCubePosition;
 	public GameObject AllCubes;
-	public GameObject LivesGUIText;
-	public int lives = 5;
+	public GUIText LivesGUIText;
+	public int score = 3000;
 	public Texture2D yellowSkin;
 	public Texture2D redSkin;
 	public Texture2D blackSkin;
@@ -25,10 +25,15 @@ public class MainObjScript : MonoBehaviour {
 	public bool canSpec;
 	public bool canChange;
 	public Material BirdType;
+	public Camera MainCamera;
+	public GameObject ExplodeSmoke;
+
 	
 	// Use this for initialization
 	void Start () {
+		
 		BirdType.mainTexture = redSkin;
+		score = 3000;
 	this.rigidbody.useGravity = false;
 	//this.rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 	originalPosition = this.transform.position;
@@ -38,13 +43,24 @@ public class MainObjScript : MonoBehaviour {
 		originalCubePosition = AllCubes.transform.position;
 		canSpec = true;
 		canChange = true;
-		
+		ExplodeSmoke.active = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
-		LivesGUIText.guiText.text = lives.ToString();
+	    
+
+		if (Input.GetKeyDown(KeyCode.Mouse1) == true)
+		{
+			MainCamera.fieldOfView = 30;
+			
+		}
+		if (Input.GetKeyUp(KeyCode.Mouse1) == true)
+		{
+			MainCamera.fieldOfView = 69;
+		}
+
+		
 		
 		if (Input.GetKeyDown(KeyCode.E) == true) 
 		{
@@ -57,6 +73,7 @@ public class MainObjScript : MonoBehaviour {
 				}
 				if (birdMode == 3)
 				{
+				ExplodeSmoke.active = true;
 				Vector3 explosionPosition = this.transform.position;
 					Collider[] colliders = Physics.OverlapSphere(explosionPosition, explosionRadius);
 					foreach (Collider hit in colliders)
@@ -68,7 +85,9 @@ public class MainObjScript : MonoBehaviour {
 						}
 					}
 				}
+
 				canSpec = false;
+				
 			}
 		}
 		
@@ -104,6 +123,8 @@ public class MainObjScript : MonoBehaviour {
 		
 		if (Input.GetKeyDown(KeyCode.R) == true)
 		{
+			score = score - 1000;
+			ExplodeSmoke.active = false;
 			canSpec = true;
 			canChange = true;
 			if (launched == true)
@@ -112,11 +133,10 @@ public class MainObjScript : MonoBehaviour {
 				this.rigidbody.useGravity = false;
 			this.transform.position = originalPosition;
 			AllCubes.transform.position = originalCubePosition;
-
 			this.rigidbody.velocity = this.transform.position * 0;
 			launched = false;
 			
-			lives = lives - 1;
+			
 			}
 		}
 		
@@ -195,7 +215,7 @@ public class MainObjScript : MonoBehaviour {
 			transform.position += new Vector3(0, 0, backInput);
 			
 		}
-		
+		LivesGUIText.text = score.ToString();
 		
 	}
 }
