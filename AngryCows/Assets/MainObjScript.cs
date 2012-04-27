@@ -10,7 +10,7 @@ public class MainObjScript : MonoBehaviour {
 	public GameObject FirstPersonCam;
 	public GameObject ReplayCam;
 	public GameObject MainCam;
-	public bool launched;
+	private bool launched;
 	public Vector3 originalCubePosition;
 	public GameObject AllCubes;
 	public GUIText LivesGUIText;
@@ -27,13 +27,13 @@ public class MainObjScript : MonoBehaviour {
 	public Material BirdType;
 	public Camera MainCamera;
 	public GameObject ExplodeSmoke;
-
+	private int subtract; 
 	
 	// Use this for initialization
 	void Start () {
 		
 		BirdType.mainTexture = redSkin;
-		score = 3000;
+		score = 0;
 	this.rigidbody.useGravity = false;
 	//this.rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 	originalPosition = this.transform.position;
@@ -49,7 +49,6 @@ public class MainObjScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	    
-
 		if (Input.GetKeyDown(KeyCode.Mouse1) == true)
 		{
 			MainCamera.fieldOfView = 30;
@@ -123,7 +122,8 @@ public class MainObjScript : MonoBehaviour {
 		
 		if (Input.GetKeyDown(KeyCode.R) == true)
 		{
-			score = score - 1000;
+			
+			subtract = 1000;
 			ExplodeSmoke.active = false;
 			canSpec = true;
 			canChange = true;
@@ -138,11 +138,32 @@ public class MainObjScript : MonoBehaviour {
 			
 			
 			}
+			
+		}
+	 	foreach (Touch touch in Input.touches)
+		{
+			if (touch.tapCount == 2)
+			{
+				
+				subtract = 1000;
+			ExplodeSmoke.active = false;
+			canSpec = true;
+			canChange = true;
+			if (launched == true)
+			{
+				this.rigidbody.velocity = this.rigidbody.velocity * 0;
+				this.rigidbody.useGravity = false;
+			this.transform.position = originalPosition;
+			AllCubes.transform.position = originalCubePosition;
+			this.rigidbody.velocity = this.transform.position * 0;
+			launched = false;
+				}
+				
+			}
 		}
 		
 		if (Input.GetKeyDown(KeyCode.C) == true)
 		{
-			
 			if (CameraMode == 1)
 			{
 				MainCam.active = false;
@@ -166,33 +187,14 @@ public class MainObjScript : MonoBehaviour {
 		
 		
 		
+		//if (Input.GetKeyDown(KeyCode.Mouse0))
+		//{
+			float backInput = Input.GetAxis("DrawBack") * Time.deltaTime * -3;
+			transform.position += new Vector3(0, 0, backInput);
 		
-		if (this.transform.position.z < 0)
-		{
-		
-		if (this.transform.position.x < -2) 
-			{
-			this.transform.position += new Vector3(1, 0, 0);
-			}
-		if (this.transform.position.x > 2)
-			{
-			this.transform.position += new Vector3(-1, 0, 0);	
-			}
-		if (this.transform.position.y < 1.7)
-			{
-			this.transform.position += new Vector3(0, 1, 0);	
-			}
-		if (this.transform.position.y > 6)
-			{
-			this.transform.position += new Vector3(0, -1, 0);
-			}
 			
-		float sideInput = Input.GetAxis("Horizontal") * Time.deltaTime * sideMultiplier;
-		transform.position += new Vector3(sideInput, 0, 0);
-		float verticalInput = Input.GetAxis("Vertical") * Time.deltaTime * verticalMultiplier;
-		transform.position += new Vector3(0, verticalInput, 0);
-	
-		if (Input.GetKeyUp(KeyCode.S) == true)
+		//}
+		if (Input.GetKeyUp(KeyCode.Mouse0) == true)
 		{
 			Vector3 draggedPosition = this.transform.position;
 		    Vector3 shootVector = originalPosition - draggedPosition;
@@ -203,19 +205,54 @@ public class MainObjScript : MonoBehaviour {
 			
 		}	
 		
-		}
-	
-	    		if (Input.GetKeyDown(KeyCode.S) == true)
+		if (this.transform.position.z < 0)
 		{
-			
-			
-			
-			
-			float backInput = Input.GetAxis("DrawBack") * Time.deltaTime * -300;
-			transform.position += new Vector3(0, 0, backInput);
-			
-		}
-		LivesGUIText.text = score.ToString();
 		
+		if (this.transform.position.x < -2) 
+			{
+			this.transform.position += new Vector3(0.8F, 0, 0);
+			}
+		if (this.transform.position.x > 2)
+			{
+			this.transform.position += new Vector3(-0.8F, 0, 0);	
+			}
+		if (this.transform.position.y < 1.7)
+			{
+			this.transform.position += new Vector3(0, 0.8F, 0);	
+			}
+		if (this.transform.position.y > 6)
+			{
+			this.transform.position += new Vector3(0, -0.8F, 0);
+			}
+		if (this.transform.position.z < -7)
+			{
+			this.transform.position += new Vector3(0, 0, 0.2F);	
+			}
+		
+		
+		if (Input.touches.Length > 0)
+			{
+				if (Input.touches[0].phase == TouchPhase.Moved)
+				{
+					float touchx = Input.touches[0].deltaPosition.x * Time.deltaTime;
+					float touchy = Input.touches[0].deltaPosition.y * Time.deltaTime;
+					
+					transform.Translate(new Vector3(touchx, touchy, 0));
+				}
+			}
+			
+		float sideInput = Input.GetAxis("Mouse X") * Time.deltaTime * sideMultiplier;
+		transform.position += new Vector3(sideInput, 0, 0);
+		float verticalInput = Input.GetAxis("Mouse Y") * Time.deltaTime * verticalMultiplier;
+		transform.position += new Vector3(0, verticalInput, 0);
+	
+				
+		
+		}
+	 		
+	    score = score - subtract; 
+		LivesGUIText.text = score.ToString();
+		subtract = 0; 
 	}
 }
+	
