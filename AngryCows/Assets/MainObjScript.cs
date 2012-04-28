@@ -28,6 +28,7 @@ public class MainObjScript : MonoBehaviour {
 	public Camera MainCamera;
 	public GameObject ExplodeSmoke;
 	private int subtract; 
+	public float touchSensitivity = 0.75F;
 	
 	// Use this for initialization
 	void Start () {
@@ -44,11 +45,17 @@ public class MainObjScript : MonoBehaviour {
 		canSpec = true;
 		canChange = true;
 		ExplodeSmoke.active = false;
+		birdMode = 1;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	    
+		if (this.transform.position.z <= 0)
+		{
+		canChange = true; 	
+		}
+	    if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
+		{
 		if (Input.GetKeyDown(KeyCode.Mouse1) == true)
 		{
 			MainCamera.fieldOfView = 30;
@@ -58,8 +65,73 @@ public class MainObjScript : MonoBehaviour {
 		{
 			MainCamera.fieldOfView = 69;
 		}
+		}
+		if (Application.platform == RuntimePlatform.Android )
+		{
+			
+			if (Input.GetKeyDown(KeyCode.Mouse1) == true) //2tap start
+				{
+					if (birdMode == 3)
+		{
+			if (canChange == true)
+			{
+			BirdType.mainTexture = redSkin;
+			birdMode = 1; 
+			}
+		}
+		else if (birdMode == 2)
+		{
+			if (canChange == true)
+			{
+			BirdType.mainTexture = blackSkin;
+			birdMode = 3;
+			}
+		}
+		else if (birdMode == 1)
+		{
+			if (canChange == true)
+			{
+			BirdType.mainTexture = yellowSkin;
+			birdMode = 2;
+			}
+		}
+					
+					}
+			//2tap end
+			
+			//touchspecstart
+			foreach (Touch touch in Input.touches)
+			{
+				if (touch.phase == TouchPhase.Stationary && this.transform.position.z > 0)
+				{
+					if (canSpec == true)
+			{
+			
+				if (birdMode == 2)
+				{
+				this.rigidbody.velocity = this.rigidbody.velocity * yellowSpec;
+				}
+				if (birdMode == 3)
+				{
+				ExplodeSmoke.active = true;
+				Vector3 explosionPosition = this.transform.position;
+					Collider[] colliders = Physics.OverlapSphere(explosionPosition, explosionRadius);
+					foreach (Collider hit in colliders)
+					{						
+					if (hit.rigidbody)
+						{
+						hit.rigidbody.AddExplosionForce(explosionPower, explosionPosition, explosionRadius, 3.0F);
+							
+						}
+					}
+				}
 
-		
+				canSpec = false;
+						}	
+				}
+			}
+			
+		}
 		
 		if (Input.GetKeyDown(KeyCode.E) == true) 
 		{
@@ -89,7 +161,7 @@ public class MainObjScript : MonoBehaviour {
 				
 			}
 		}
-		
+			
 		
 		
 		if (Input.GetKeyDown(KeyCode.Alpha1) == true)
@@ -140,11 +212,11 @@ public class MainObjScript : MonoBehaviour {
 			}
 			
 		}
-	 	foreach (Touch touch in Input.touches)
-		{
-			if (touch.tapCount == 2)
+	 	
+			if (Application.platform == RuntimePlatform.Android)
 			{
-				
+				if (Input.GetKey(KeyCode.Escape))
+			{
 				subtract = 1000;
 			ExplodeSmoke.active = false;
 			canSpec = true;
@@ -157,10 +229,11 @@ public class MainObjScript : MonoBehaviour {
 			AllCubes.transform.position = originalCubePosition;
 			this.rigidbody.velocity = this.transform.position * 0;
 			launched = false;
+					return; 
 				}
-				
 			}
-		}
+			}
+		
 		
 		if (Input.GetKeyDown(KeyCode.C) == true)
 		{
@@ -189,20 +262,24 @@ public class MainObjScript : MonoBehaviour {
 		
 		//if (Input.GetKeyDown(KeyCode.Mouse0))
 		//{
+		if (this.transform.position.z <= 0)
+		{
 			float backInput = Input.GetAxis("DrawBack") * Time.deltaTime * -3;
 			transform.position += new Vector3(0, 0, backInput);
-		
+		}
 			
 		//}
 		if (Input.GetKeyUp(KeyCode.Mouse0) == true)
 		{
+			if (this.transform.position.z < 0)
+			{
 			Vector3 draggedPosition = this.transform.position;
 		    Vector3 shootVector = originalPosition - draggedPosition;
 			this.rigidbody.velocity = shootVector * Multiplier;
 
 			this.rigidbody.useGravity = true;
 			launched = true;
-			
+			}
 		}	
 		
 		if (this.transform.position.z < 0)
@@ -226,26 +303,31 @@ public class MainObjScript : MonoBehaviour {
 			}
 		if (this.transform.position.z < -7)
 			{
-			this.transform.position += new Vector3(0, 0, 0.2F);	
+			this.transform.position += new Vector3(0, 0, 0.1F);	
 			}
 		
-		
+		if (Application.platform == RuntimePlatform.Android)
+			{
 		if (Input.touches.Length > 0)
 			{
 				if (Input.touches[0].phase == TouchPhase.Moved)
 				{
-					float touchx = Input.touches[0].deltaPosition.x * Time.deltaTime;
-					float touchy = Input.touches[0].deltaPosition.y * Time.deltaTime;
-					
+					float touchx = Input.touches[0].deltaPosition.x * Time.deltaTime * touchSensitivity;
+					float touchy = Input.touches[0].deltaPosition.y * Time.deltaTime * touchSensitivity;
+					if (this.transform.position.z < 0)
+			{
 					transform.Translate(new Vector3(touchx, touchy, 0));
+						}
 				}
 			}
-			
+			}
+		if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
+			{
 		float sideInput = Input.GetAxis("Mouse X") * Time.deltaTime * sideMultiplier;
 		transform.position += new Vector3(sideInput, 0, 0);
 		float verticalInput = Input.GetAxis("Mouse Y") * Time.deltaTime * verticalMultiplier;
 		transform.position += new Vector3(0, verticalInput, 0);
-	
+			}
 				
 		
 		}
@@ -255,4 +337,3 @@ public class MainObjScript : MonoBehaviour {
 		subtract = 0; 
 	}
 }
-	
