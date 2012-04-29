@@ -29,6 +29,9 @@ public class MainObjScript : MonoBehaviour {
 	public GameObject ExplodeSmoke;
 	private int subtract; 
 	public float touchSensitivity = 0.75F;
+	public GameObject CamObject; 
+	private Quaternion CamObjRotate; 
+	private Vector3 tiltOffset; 
 	
 	// Use this for initialization
 	void Start () {
@@ -47,6 +50,7 @@ public class MainObjScript : MonoBehaviour {
 		canChange = true;
 		ExplodeSmoke.active = false;
 		birdMode = 1;
+		CamObjRotate = CamObject.transform.rotation; 
 	}
 	
 	// Update is called once per frame
@@ -56,22 +60,23 @@ public class MainObjScript : MonoBehaviour {
 		{
 		canChange = true; 	
 		}
-	    if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.FlashPlayer)
+	    if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.FlashPlayer || Application.platform == RuntimePlatform.NaCl || Application.platform == RuntimePlatform.WindowsWebPlayer)
 		{
-		if (Input.GetKeyDown(KeyCode.Mouse1) == true)
+		if (Input.GetKey(KeyCode.Mouse1) == true)
 		{
-			MainCamera.fieldOfView = 30;
-			
+			float sideInput = Input.GetAxis("Mouse X") * Time.deltaTime * sideMultiplier * 5;
+		float verticalInput = Input.GetAxis("Mouse Y") * Time.deltaTime * verticalMultiplier * 5;
+			Vector3 rotateVector = new Vector3(verticalInput, sideInput, 0);
+				CamObject.transform.Rotate(rotateVector); 
 		}
 		if (Input.GetKeyUp(KeyCode.Mouse1) == true)
 		{
-			MainCamera.fieldOfView = 69;
+			CamObject.transform.rotation = CamObjRotate; 
 		}
 		}
 		if (Application.platform == RuntimePlatform.Android )
 		{
-			
-			if (Input.GetKeyDown(KeyCode.Mouse1) == true) //2tap start
+			if (Input.GetKeyDown(KeyCode.Mouse1)) //2tap start
 				{
 					if (birdMode == 3)
 		{
@@ -98,9 +103,8 @@ public class MainObjScript : MonoBehaviour {
 			}
 		}
 					
-					}
+			}		
 			//2tap end
-			
 			//touchspecstart
 			foreach (Touch touch in Input.touches)
 			{
@@ -131,6 +135,8 @@ public class MainObjScript : MonoBehaviour {
 				canSpec = false;
 						}	
 				}
+				
+				
 			}
 			
 		}
@@ -234,6 +240,7 @@ public class MainObjScript : MonoBehaviour {
 					return; 
 				}
 			}
+			
 			}
 		
 		
@@ -269,8 +276,8 @@ public class MainObjScript : MonoBehaviour {
 			float backInput = Input.GetAxis("DrawBack") * Time.deltaTime * -3;
 			transform.position += new Vector3(0, 0, backInput);
 		}
-			
 		//}
+		
 		if (Input.GetKeyUp(KeyCode.Mouse0) == true)
 		{
 			if (this.transform.position.z < 0)
@@ -282,6 +289,7 @@ public class MainObjScript : MonoBehaviour {
 			this.rigidbody.useGravity = true;
 			launched = true;
 			}
+			//camerascript
 		}	
 		
 		if (this.transform.position.z < 0)
@@ -323,7 +331,7 @@ public class MainObjScript : MonoBehaviour {
 				}
 			}
 			}
-		if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.FlashPlayer)
+		if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.FlashPlayer || Application.platform == RuntimePlatform.NaCl || Application.platform == RuntimePlatform.WindowsWebPlayer)
 			{
 		float sideInput = Input.GetAxis("Mouse X") * Time.deltaTime * sideMultiplier;
 		transform.position += new Vector3(sideInput, 0, 0);
