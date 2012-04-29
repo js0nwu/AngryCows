@@ -35,6 +35,7 @@ public class MainObjScript : MonoBehaviour {
 		
 		BirdType.mainTexture = redSkin;
 		score = 0;
+		LivesGUIText.guiText.text = score.ToString(); 
 	this.rigidbody.useGravity = false;
 	//this.rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 	originalPosition = this.transform.position;
@@ -50,11 +51,12 @@ public class MainObjScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		score = int.Parse(LivesGUIText.guiText.text.ToString()); 
 		if (this.transform.position.z <= 0)
 		{
 		canChange = true; 	
 		}
-	    if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
+	    if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.FlashPlayer)
 		{
 		if (Input.GetKeyDown(KeyCode.Mouse1) == true)
 		{
@@ -287,19 +289,19 @@ public class MainObjScript : MonoBehaviour {
 		
 		if (this.transform.position.x < -2) 
 			{
-			this.transform.position += new Vector3(0.8F, 0, 0);
+			this.transform.position += new Vector3(0.1F, 0, 0);
 			}
 		if (this.transform.position.x > 2)
 			{
-			this.transform.position += new Vector3(-0.8F, 0, 0);	
+			this.transform.position += new Vector3(-0.1F, 0, 0);	
 			}
 		if (this.transform.position.y < 1.7)
 			{
-			this.transform.position += new Vector3(0, 0.8F, 0);	
+			this.transform.position += new Vector3(0, 0.1F, 0);	
 			}
 		if (this.transform.position.y > 6)
 			{
-			this.transform.position += new Vector3(0, -0.8F, 0);
+			this.transform.position += new Vector3(0, -0.1F, 0);
 			}
 		if (this.transform.position.z < -7)
 			{
@@ -321,7 +323,7 @@ public class MainObjScript : MonoBehaviour {
 				}
 			}
 			}
-		if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
+		if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.FlashPlayer)
 			{
 		float sideInput = Input.GetAxis("Mouse X") * Time.deltaTime * sideMultiplier;
 		transform.position += new Vector3(sideInput, 0, 0);
