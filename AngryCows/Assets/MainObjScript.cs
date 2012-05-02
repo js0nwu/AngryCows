@@ -18,6 +18,7 @@ public class MainObjScript : MonoBehaviour {
 	public Texture2D yellowSkin;
 	public Texture2D redSkin;
 	public Texture2D blackSkin;
+	public Texture2D blueSkin; 
 	public int birdMode;
 	public float yellowSpec = 3;
 	public float explosionRadius = 5.0F;
@@ -32,6 +33,11 @@ public class MainObjScript : MonoBehaviour {
 	public GameObject CamObject; 
 	private Quaternion CamObjRotate; 
 	private Vector3 tiltOffset; 
+	public GameObject BirdSpawnPoint; 
+	public GameObject BlueClone; 
+	private Vector3 shootVector; 
+	public GameObject BirdVector1;
+	public GameObject BirdVector2;
 	
 	// Use this for initialization
 	void Start () {
@@ -82,8 +88,8 @@ public class MainObjScript : MonoBehaviour {
 		{
 			if (canChange == true)
 			{
-			BirdType.mainTexture = redSkin;
-			birdMode = 1; 
+			BirdType.mainTexture = blueSkin;
+			birdMode = 4; 
 			}
 		}
 		else if (birdMode == 2)
@@ -102,6 +108,14 @@ public class MainObjScript : MonoBehaviour {
 			birdMode = 2;
 			}
 		}
+		else if (birdMode == 4)
+				{
+					if (canChange == true)
+					{
+						BirdType.mainTexture = redSkin;
+						birdMode = 1;
+					}
+				}
 					
 			}		
 			//2tap end
@@ -131,7 +145,17 @@ public class MainObjScript : MonoBehaviour {
 						}
 					}
 				}
-
+				if (birdMode == 4)
+				{
+					Transform clone1;
+					clone1 = (Transform)Instantiate(BlueClone.transform, BirdSpawnPoint.transform.position + new Vector3(1, 0, 0), BlueClone.transform.rotation);
+					clone1.rigidbody.velocity = this.rigidbody.velocity.magnitude * BirdVector1.transform.forward * 1.1F;
+					Destroy(clone1.gameObject, 10.0F);
+					Transform clone2;
+					clone2 = (Transform)Instantiate(BlueClone.transform, BirdSpawnPoint.transform.position + new Vector3(-1, 0, 0), BlueClone.transform.rotation);
+					clone2.rigidbody.velocity = this.rigidbody.velocity.magnitude * BirdVector2.transform.forward * 1.1F;
+					Destroy(clone2.gameObject, 10.0F);
+				}
 				canSpec = false;
 						}	
 				}
@@ -164,7 +188,17 @@ public class MainObjScript : MonoBehaviour {
 						}
 					}
 				}
-
+				if (birdMode == 4)
+				{
+					Transform clone1;
+					clone1 = (Transform)Instantiate(BlueClone.transform, BirdSpawnPoint.transform.position + new Vector3(1, 0, 0), BlueClone.transform.rotation);
+					clone1.rigidbody.velocity = this.rigidbody.velocity.magnitude * BirdVector1.transform.forward * 1.1F;
+					Destroy(clone1.gameObject, 10.0F);
+					Transform clone2;
+					clone2 = (Transform)Instantiate(BlueClone.transform, BirdSpawnPoint.transform.position + new Vector3(-1, 0, 0), BlueClone.transform.rotation);
+					clone2.rigidbody.velocity = this.rigidbody.velocity.magnitude * BirdVector2.transform.forward * 1.1F;
+					Destroy(clone2.gameObject, 10.0F);
+				}
 				canSpec = false;
 				
 			}
@@ -197,6 +231,15 @@ public class MainObjScript : MonoBehaviour {
 			BirdType.mainTexture = blackSkin;
 			birdMode = 3;
 			canChange = false;
+			}
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha4) == true)
+		{
+			if (canChange == true)
+			{
+				BirdType.mainTexture = blueSkin;
+				birdMode = 4;
+				canChange = false; 
 			}
 		}
 		
@@ -283,7 +326,7 @@ public class MainObjScript : MonoBehaviour {
 			if (this.transform.position.z < 0)
 			{
 			Vector3 draggedPosition = this.transform.position;
-		    Vector3 shootVector = originalPosition - draggedPosition;
+		    shootVector = originalPosition - draggedPosition;
 			this.rigidbody.velocity = shootVector * Multiplier;
 
 			this.rigidbody.useGravity = true;
