@@ -389,4 +389,26 @@ public class MainObjScript : MonoBehaviour {
 		LivesGUIText.text = score.ToString();
 		subtract = 0; 
 	}
+	public void OnTriggerEnter (Collider col)
+	{
+		if (col.transform.CompareTag("EggProjectile"))
+		{
+			subtract = 2500;
+			ExplodeSmoke.active = false;
+			canSpec = true;
+			canChange = true;
+			if (launched == true)
+			{
+				this.rigidbody.velocity = this.rigidbody.velocity * 0;
+				this.rigidbody.useGravity = false;
+			this.transform.position = originalPosition;
+			AllCubes.transform.position = originalCubePosition;
+			this.rigidbody.velocity = this.transform.position * 0;
+			launched = false;
+			this.gameObject.active = false; 
+			
+			}
+				
+		}
+	}
 }
