@@ -14,7 +14,7 @@ Platform assembly: C:\Users\PillyBuilt7\AngryCows\AngryCows\Build8\build008_Data
 Loading C:\Users\PillyBuilt7\AngryCows\AngryCows\Build8\build008_Data\Managed\UnityEngine.dll into Unity Child Domain
 Platform assembly: C:\Users\PillyBuilt7\AngryCows\AngryCows\Build8\build008_Data\Managed\Assembly-CSharp.dll (this message is harmless)
 Loading C:\Users\PillyBuilt7\AngryCows\AngryCows\Build8\build008_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-- Completed reload, in  0.059 seconds
+- Completed reload, in  0.064 seconds
 NullReferenceException: Object reference not set to an instance of an object
   at MainObjScript.Start () [0x0006a] in C:\Users\PillyBuilt7\AngryCows\AngryCows\Assets\MainObjScript.cs:54 
  
@@ -41,56 +41,6 @@ NullReferenceException: Object reference not set to an instance of an object
 (Filename: C Line: 0)
 
 NullReferenceException: Object reference not set to an instance of an object
-  at MainObjScript.OnTriggerEnter (UnityEngine.Collider col) [0x00082] in C:\Users\PillyBuilt7\AngryCows\AngryCows\Assets\MainObjScript.cs:405 
- 
-(Filename: C Line: 0)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at MainObjScript.Update () [0x007d2] in C:\Users\PillyBuilt7\AngryCows\AngryCows\Assets\MainObjScript.cs:258 
- 
-(Filename: C Line: 0)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at MainObjScript.Update () [0x007d2] in C:\Users\PillyBuilt7\AngryCows\AngryCows\Assets\MainObjScript.cs:258 
- 
-(Filename: C Line: 0)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at MainObjScript.Update () [0x007d2] in C:\Users\PillyBuilt7\AngryCows\AngryCows\Assets\MainObjScript.cs:258 
- 
-(Filename: C Line: 0)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at MainObjScript.OnTriggerEnter (UnityEngine.Collider col) [0x00082] in C:\Users\PillyBuilt7\AngryCows\AngryCows\Assets\MainObjScript.cs:405 
- 
-(Filename: C Line: 0)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at MainObjScript.OnTriggerEnter (UnityEngine.Collider col) [0x00082] in C:\Users\PillyBuilt7\AngryCows\AngryCows\Assets\MainObjScript.cs:405 
- 
-(Filename: C Line: 0)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at MainObjScript.Update () [0x007d2] in C:\Users\PillyBuilt7\AngryCows\AngryCows\Assets\MainObjScript.cs:258 
- 
-(Filename: C Line: 0)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at MainObjScript.Update () [0x007d2] in C:\Users\PillyBuilt7\AngryCows\AngryCows\Assets\MainObjScript.cs:258 
- 
-(Filename: C Line: 0)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at MainObjScript.Update () [0x007d2] in C:\Users\PillyBuilt7\AngryCows\AngryCows\Assets\MainObjScript.cs:258 
- 
-(Filename: C Line: 0)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at MainObjScript.Update () [0x007d2] in C:\Users\PillyBuilt7\AngryCows\AngryCows\Assets\MainObjScript.cs:258 
- 
-(Filename: C Line: 0)
-
-NullReferenceException: Object reference not set to an instance of an object
   at MainObjScript.Update () [0x007d2] in C:\Users\PillyBuilt7\AngryCows\AngryCows\Assets\MainObjScript.cs:258 
  
 (Filename: C Line: 0)
@@ -102,71 +52,6 @@ NullReferenceException: Object reference not set to an instance of an object
 
 NullReferenceException: Object reference not set to an instance of an object
   at MainObjScript.OnTriggerEnter (UnityEngine.Collider col) [0x00082] in C:\Users\PillyBuilt7\AngryCows\AngryCows\Assets\MainObjScript.cs:405 
- 
-(Filename: C Line: 0)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at MainObjScript.OnTriggerEnter (UnityEngine.Collider col) [0x00082] in C:\Users\PillyBuilt7\AngryCows\AngryCows\Assets\MainObjScript.cs:405 
- 
-(Filename: C Line: 0)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at MainObjScript.Update () [0x007d2] in C:\Users\PillyBuilt7\AngryCows\AngryCows\Assets\MainObjScript.cs:258 
- 
-(Filename: C Line: 0)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at MainObjScript.Update () [0x007d2] in C:\Users\PillyBuilt7\AngryCows\AngryCows\Assets\MainObjScript.cs:258 
- 
-(Filename: C Line: 0)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at MainObjScript.OnTriggerEnter (UnityEngine.Collider col) [0x00082] in C:\Users\PillyBuilt7\AngryCows\AngryCows\Assets\MainObjScript.cs:405 
- 
-(Filename: C Line: 0)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at MainObjScript.OnTriggerEnter (UnityEngine.Collider col) [0x00082] in C:\Users\PillyBuilt7\AngryCows\AngryCows\Assets\MainObjScript.cs:405 
- 
-(Filename: C Line: 0)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at MainObjScript.OnTriggerEnter (UnityEngine.Collider col) [0x00082] in C:\Users\PillyBuilt7\AngryCows\AngryCows\Assets\MainObjScript.cs:405 
- 
-(Filename: C Line: 0)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at MainObjScript.OnTriggerEnter (UnityEngine.Collider col) [0x00082] in C:\Users\PillyBuilt7\AngryCows\AngryCows\Assets\MainObjScript.cs:405 
- 
-(Filename: C Line: 0)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at MainObjScript.OnTriggerEnter (UnityEngine.Collider col) [0x00082] in C:\Users\PillyBuilt7\AngryCows\AngryCows\Assets\MainObjScript.cs:405 
- 
-(Filename: C Line: 0)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at MainObjScript.OnTriggerEnter (UnityEngine.Collider col) [0x00082] in C:\Users\PillyBuilt7\AngryCows\AngryCows\Assets\MainObjScript.cs:405 
- 
-(Filename: C Line: 0)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at MainObjScript.OnTriggerEnter (UnityEngine.Collider col) [0x00082] in C:\Users\PillyBuilt7\AngryCows\AngryCows\Assets\MainObjScript.cs:405 
- 
-(Filename: C Line: 0)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at MainObjScript.Update () [0x007d2] in C:\Users\PillyBuilt7\AngryCows\AngryCows\Assets\MainObjScript.cs:258 
- 
-(Filename: C Line: 0)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at MainObjScript.OnTriggerEnter (UnityEngine.Collider col) [0x00082] in C:\Users\PillyBuilt7\AngryCows\AngryCows\Assets\MainObjScript.cs:405 
- 
-(Filename: C Line: 0)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at MainObjScript.Update () [0x007d2] in C:\Users\PillyBuilt7\AngryCows\AngryCows\Assets\MainObjScript.cs:258 
  
 (Filename: C Line: 0)
 

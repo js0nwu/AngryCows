@@ -410,5 +410,10 @@ public class MainObjScript : MonoBehaviour {
 			}
 				
 		}
+		if (col.transform.CompareTag("Pig"))
+		{
+			col.gameObject.SetActiveRecursively(false); 
+			subtract = -5000;	
+		}
 	}
 }

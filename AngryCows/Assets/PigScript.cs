@@ -6,7 +6,7 @@ public class PigScript : MonoBehaviour {
 	private Vector3 startPos; 
 	private float startDistance; 
 	public float deathDistance = 5.0F; 
-	private int score; 
+	public int knockScore = 2500; 
 	public GUIText LivesGUIText; 
 	
 	// Use this for initialization
@@ -19,21 +19,14 @@ public class PigScript : MonoBehaviour {
 	startDistance = Vector3.Distance(this.transform.position, startPos);
 	if (startDistance >= deathDistance)
 		{
+			int score; 
 			this.gameObject.SetActiveRecursively(false); 
 			score = int.Parse(LivesGUIText.guiText.text.ToString()); 
-			score += 2500;
+			score += knockScore;
 			LivesGUIText.guiText.text = score.ToString(); 
+			score = 0; 
 		}
 	
 	}
-	public void OnTriggerEnter(Collider col)
-	{
-		if (col.transform.CompareTag("Bird"))
-		{
-			this.gameObject.SetActiveRecursively(false); 
-			score = int.Parse(LivesGUIText.guiText.text.ToString()); 
-			score += 5000;
-			LivesGUIText.guiText.text = score.ToString(); 
-		}
-	}
+	
 }
