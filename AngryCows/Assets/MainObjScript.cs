@@ -415,5 +415,22 @@ public class MainObjScript : MonoBehaviour {
 			col.gameObject.SetActiveRecursively(false); 
 			subtract = -5000;	
 		}
+		if (col.transform.CompareTag("WallLimit"))
+		{
+			subtract = 1000;
+			ExplodeSmoke.active = false;
+			canSpec = true;
+			canChange = true;
+			if (launched == true)
+			{
+				this.rigidbody.velocity = this.rigidbody.velocity * 0;
+				this.rigidbody.useGravity = false;
+			this.transform.position = originalPosition;
+			AllCubes.transform.position = originalCubePosition;
+			this.rigidbody.velocity = this.transform.position * 0;
+			launched = false;
+			this.gameObject.active = false; 
+			}
+		}
 	}
 }
