@@ -9,6 +9,7 @@ public class PigScript : MonoBehaviour {
 	public int knockScore = 2500; 
 	public GUIText LivesGUIText; 
 	
+	
 	// Use this for initialization
 	void Start () {
 	startPos = this.transform.position; 

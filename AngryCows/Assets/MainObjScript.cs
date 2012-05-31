@@ -38,6 +38,9 @@ public class MainObjScript : MonoBehaviour {
 	private Vector3 shootVector; 
 	public GameObject BirdVector1;
 	public GameObject BirdVector2;
+	public GUIText KingPigHealth; 
+	public GameObject KingPig; 
+	public GameObject explodeCollider; 
 	
 	// Use this for initialization
 	void Start () {
@@ -57,6 +60,7 @@ public class MainObjScript : MonoBehaviour {
 		ExplodeSmoke.active = false;
 		birdMode = 1;
 		CamObjRotate = CamObject.transform.rotation; 
+		explodeCollider.active = false; 
 	}
 	
 	// Update is called once per frame
@@ -143,6 +147,7 @@ public class MainObjScript : MonoBehaviour {
 						hit.rigidbody.AddExplosionForce(explosionPower, explosionPosition, explosionRadius, 3.0F);
 							
 						}
+								explodeCollider.active = true; 
 					}
 				}
 				if (birdMode == 4)
@@ -184,9 +189,9 @@ public class MainObjScript : MonoBehaviour {
 					if (hit.rigidbody)
 						{
 						hit.rigidbody.AddExplosionForce(explosionPower, explosionPosition, explosionRadius, 3.0F);
-							
 						}
 					}
+					explodeCollider.active = true; 
 				}
 				if (birdMode == 4)
 				{
@@ -245,7 +250,12 @@ public class MainObjScript : MonoBehaviour {
 		
 		if (Input.GetKeyDown(KeyCode.R) == true)
 		{
-			
+			if (this.transform.position.z > 0)
+			{
+				explodeCollider.active = false; 
+			BirdType.mainTexture = redSkin;
+			birdMode = 1; 	
+			canChange = false;
 			subtract = 1000;
 			ExplodeSmoke.active = false;
 			canSpec = true;
@@ -261,6 +271,7 @@ public class MainObjScript : MonoBehaviour {
 			
 			
 			}
+			}
 			
 		}
 	 	
@@ -268,6 +279,13 @@ public class MainObjScript : MonoBehaviour {
 			{
 				if (Input.GetKey(KeyCode.Escape))
 			{
+				if (this.transform.position.z > 0)
+				{
+					explodeCollider.active = false; 
+				launched = false;
+					BirdType.mainTexture = redSkin;
+			birdMode = 1; 	
+			canChange = false;
 				subtract = 1000;
 			ExplodeSmoke.active = false;
 			canSpec = true;
@@ -279,8 +297,9 @@ public class MainObjScript : MonoBehaviour {
 			this.transform.position = originalPosition;
 			AllCubes.transform.position = originalCubePosition;
 			this.rigidbody.velocity = this.transform.position * 0;
-			launched = false;
+			
 					return; 
+				}
 				}
 			}
 			
@@ -393,6 +412,10 @@ public class MainObjScript : MonoBehaviour {
 	{
 		if (col.transform.CompareTag("EggProjectile"))
 		{
+			explodeCollider.active = false; 
+			BirdType.mainTexture = redSkin;
+			birdMode = 1; 	
+			canChange = false;
 			subtract = 2500;
 			ExplodeSmoke.active = false;
 			canSpec = true;
@@ -405,8 +428,7 @@ public class MainObjScript : MonoBehaviour {
 			AllCubes.transform.position = originalCubePosition;
 			this.rigidbody.velocity = this.transform.position * 0;
 			launched = false;
-			this.gameObject.active = false; 
-			
+				
 			}
 				
 		}
@@ -417,6 +439,10 @@ public class MainObjScript : MonoBehaviour {
 		}
 		if (col.transform.CompareTag("WallLimit"))
 		{
+			explodeCollider.active = false; 
+				BirdType.mainTexture = redSkin;
+			birdMode = 1; 	
+			canChange = false;
 			subtract = 1000;
 			ExplodeSmoke.active = false;
 			canSpec = true;
@@ -429,7 +455,7 @@ public class MainObjScript : MonoBehaviour {
 			AllCubes.transform.position = originalCubePosition;
 			this.rigidbody.velocity = this.transform.position * 0;
 			launched = false;
-			this.gameObject.active = false; 
+				
 			}
 		}
 	}

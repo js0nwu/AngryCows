@@ -44,9 +44,12 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\KingExplode.cs" />
+     <Compile Include="Assets\KingPigScript.cs" />
      <Compile Include="Assets\MainObjScript.cs" />
      <Compile Include="Assets\PigAimScript.cs" />
      <Compile Include="Assets\PigScript.cs" />
+     <Compile Include="Assets\ReplayButtonScript.cs" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
